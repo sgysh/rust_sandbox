@@ -1,0 +1,1 @@
+# Variety of rust codes
