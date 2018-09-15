@@ -1,0 +1,8 @@
+[package]
+name = "c-to-rust"
+version = "0.1.0"
+authors = ["y-sugino <ysgn0101@gmail.com>"]
+
+[lib]
+name = "calc"
+crate-type = ["staticlib"]
