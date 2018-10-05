@@ -23,7 +23,7 @@ fn real_main() -> i32 {
     0
 }
 
-fn print_value(v: Value, depth: i32) {
+fn print_value(v: Value, depth: usize) {
     if !v.is_object() {
         println!("{}", v);
         return;
@@ -33,22 +33,16 @@ fn print_value(v: Value, depth: i32) {
 
     for (name, value) in obj.iter() {
         if value.is_object() {
-            print_spaces(depth);
+            print!("{}", " ".repeat(depth));
             println!("{} = [", name);
 
             print_value(value.clone(), depth + 2);
 
-            print_spaces(depth);
+            print!("{}", " ".repeat(depth));
             println!("]");
         } else {
-            print_spaces(depth);
+            print!("{}", " ".repeat(depth));
             println!("{} -> {}", name, value);
         }
-    }
-}
-
-fn print_spaces(n: i32) {
-    for _ in 0..n {
-        print!(" ");
     }
 }
