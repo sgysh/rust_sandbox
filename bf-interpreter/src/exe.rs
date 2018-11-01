@@ -3,7 +3,7 @@ use std::error::Error;
 use std::io;
 use std::io::{Read, Write, Seek, SeekFrom};
 
-fn skip_to_closing_parenthesis<R: Read>(r: &mut R, open: char, close: char) -> Result<(), Box<Error>> {
+fn skip_to_close_parenthesis<R: Read>(r: &mut R, open: char, close: char) -> Result<(), Box<Error>> {
     let mut nest = 1;
     let mut b = [0_u8; 1];
 
@@ -46,7 +46,7 @@ pub fn execute<O: Write, I: Read + Seek>(output: &mut O, input: &mut I) -> Resul
                     let p = input.seek(SeekFrom::Current(0))?;
                     stack.push(p);
                 } else {
-                    skip_to_closing_parenthesis(input, '[', ']')?;
+                    skip_to_close_parenthesis(input, '[', ']')?;
                 }
             },
             ']' => {
@@ -73,7 +73,7 @@ mod tests {
     #[test]
     fn square_bracket() {
         let mut r = Cursor::new("+-><[[]]]++");
-        assert!(skip_to_closing_parenthesis(&mut r, '[', ']').is_ok());
+        assert!(skip_to_close_parenthesis(&mut r, '[', ']').is_ok());
         assert_eq!(r.position(), 9);
     }
 }
