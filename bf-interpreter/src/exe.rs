@@ -76,11 +76,4 @@ mod tests {
         assert!(skip_to_closing_parenthesis(&mut r, '[', ']').is_ok());
         assert_eq!(r.position(), 9);
     }
-
-    #[test]
-    fn angle_bracket() {
-        let mut r = Cursor::new("<>>");
-        assert!(skip_to_closing_parenthesis(&mut r, '<', '>').is_ok());
-        assert_eq!(r.position(), 3);
-    }
 }
